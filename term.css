@@ -14,15 +14,26 @@ body {
 	margin: 0; padding: 0;
 }
 #term {
-	background: #000;
+	background-color: #000;
 	color: #00ff00;
-	margin: 1% auto;
+	margin: 0;
 	font-family: 'Press Start 2P', monospace;
 	font-size: 10pt;
+	/*temporarily for video recording:*/
+	/*width: 1024px;
+	height: 576px;
+	top:0; left:0;*/
+
 	position: absolute;
 	top: 5%; left: 5%; bottom: 5%; right: 5%;
 	padding: 4px;
 	overflow: hidden;
+}
+.termbootlogo {
+	background-color: #888 !important;
+	background-image: url(./telecomix.png) !important;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 #term-content {
 
@@ -40,9 +51,23 @@ audio {
 #info {
 	position: absolute;
 	bottom: 2px;
-	left: 2px;
+	left: 5%;
 	font-size: 60%;
 	opacity: 0.6;
+}
+#kopimi {
+	position: absolute;
+	bottom: 0;
+	left: 20%;
+	right: 20%;
+}
+#kopimi a {
+	display: block;
+	width: 3em;
+	margin: 0 auto;
+}
+#kopimi a img {
+	width: 100%;
 }
 /*#info p {
 	display: inline;

@@ -1,4 +1,5 @@
 
+var snd;
 var blink_cursor_state = false;
 function blink_cursor() {
 
@@ -12,6 +13,14 @@ function term_append(text) {
 }
 var type_text_pos = [0,0];
 var type_text_str = [
+	['LulzBIOS version 1.3.3.7 build &gt;9000\n', 0],
+	['Copyleft 1970-2012 Telecomix News Agency International\n', 0],
+	['All rights reversed.\n\n', 0],
+	['', 1000],
+	['Windows not found -- not removing anything.\n', 0],
+	['\n', 1600],
+	['PXE error: IP over Avian Carriers: protocol not available on this platform!', 0], ['\n', 850],
+	['Booting from fax0.\n', 0], ['\n', 1000],
 	['Loading kernel', 0],
 	['.........................', 80],
 	['Done\n', 0],
@@ -60,13 +69,30 @@ function type_text() {
 	}
 }
 function play_sound() {
-	$('#bootup').get(0).play();
+	snd.play();
 }
+function check_sound_loaded() {
+	if ((snd.readyState==4)/* && ($('#bootup').get(0).networkState==4)*/) start_everything();
+	else setTimeout(check_sound_loaded, 500);
+}
+
 $(document).ready(function() {
-	setTimeout('blink_cursor();', 100);
-	setTimeout('type_text();', 800);
-	setTimeout('play_sound();', 800);
+	snd = document.createElement('audio');
+	snd.autoplay = false;
+	snd.preload = 'auto';
+	snd.src = './bootup.oga';
+	snd.load();
+	$('body').append(snd);
+	check_sound_loaded();
 });
+
+function start_everything() {
+	setTimeout('$("#term").addClass("termbootlogo");', 1200);
+	setTimeout('$("#term").removeClass("termbootlogo");', 2200);
+	setTimeout('blink_cursor();', 2400);
+	setTimeout('type_text();', 2900);
+	setTimeout('play_sound();', 10);
+}
 $(window).keypress(function(event) {
 	if (event.charCode=='i'.charCodeAt(0)) window.open('http://chat.werebuild.eu/?channels=telecomix,Polska', 'tcx-irc', '');
 	/*event.charCode-48;*/
